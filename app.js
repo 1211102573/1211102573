@@ -163,7 +163,7 @@ class App{
         
         const self = this;
         
-        const timeoutId = setTimeout( connectionTimeout, 4000 ); // Increase Delay 
+        const timeoutId = setTimeout(connectionTimeout, 4000); // Increase Delay 
         
         function onSelectStart( event ) {
         
