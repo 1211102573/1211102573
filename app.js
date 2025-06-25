@@ -307,7 +307,7 @@ class App{
     
     showInfoboard( name, info, pos ){
         if (this.ui === undefined ) return;
-        this.ui.position.copy(pos).add( this.workingVec3.set( 0, 1.0, 0 ) ); // Zoom In UI Panel
+        this.ui.position.copy(pos).add( this.workingVec3.set( 0, 1.3, 0 ) );
         const camPos = this.dummyCam.getWorldPosition( this.workingVec3 );
         this.ui.updateElement( 'name', info.name );
         this.ui.updateElement( 'info', info.info );
