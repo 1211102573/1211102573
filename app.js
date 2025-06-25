@@ -27,7 +27,8 @@ class App{
         this.camera.add( this.dummyCam );
         
 		this.scene = new THREE.Scene();
-        this.scene.add( this.dolly );
+		this.scene.background = new THREE.Color(0x202030); // Custom background color
+    		this.scene.add( this.dolly );
         
 		const ambient = new THREE.HemisphereLight(0xFFFFFF, 0xAAAAAA, 0.8);
 		this.scene.add(ambient);
