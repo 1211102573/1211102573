@@ -18,7 +18,7 @@ class App{
 		this.assetsPath = './assets/';
         
 		this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.01, 500 );  // Modified Wider Camera POV
-		this.camera.position.set( 0, 1.6, 0 );
+		this.camera.position.set( 0, 1.2, 0 ); // Lower Camera Viewpoint
         
         this.dolly = new THREE.Object3D();
         this.dolly.position.set(0, 0, 5);  // Modified Dolly Start Position
