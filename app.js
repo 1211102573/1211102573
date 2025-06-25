@@ -38,6 +38,9 @@ class App{
    		// dirLight.castShadow = true;
   		// this.scene.add(dirLight);
 
+		const gridHelper = new THREE.GridHelper(20, 20); // Grid helper
+		this.scene.add(gridHelper);
+		
 		this.renderer = new THREE.WebGLRenderer({ antialias: true });
 		this.renderer.setPixelRatio( window.devicePixelRatio );
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
