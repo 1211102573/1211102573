@@ -28,7 +28,8 @@ class App{
         
 		this.scene = new THREE.Scene();
 		this.scene.background = new THREE.Color(0x202030); // Custom background color
-    		this.scene.add( this.dolly );
+    		this.scene.fog = new THREE.Fog(0x000000, 10, 30); // Fog
+		this.scene.add( this.dolly );
         
 		const ambient = new THREE.HemisphereLight(0xFFFFFF, 0xAAAAAA, 0.4); // Lower Lighting Instensity
 		this.scene.add(ambient);
