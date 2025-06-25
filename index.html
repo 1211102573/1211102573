@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>VR Architectural Walkthrough with WebXR</title>
+	<title>VR Architectural Walkthrough with WebXR MODDED</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="apple-touch-icon" sizes="180x180" href="./css/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./css/favicon/favicon-32x32.png">
@@ -27,6 +27,22 @@
 		document.addEventListener("DOMContentLoaded", function(){
 			const app = new App();
 			window.app = app;
+
+	            // Update position in HUD every frame
+	            const coordsEl = document.getElementById('coords');
+	            const updateCoords = () => {
+	                if (app?.dolly && coordsEl) {
+	                    const pos = app.dolly.position;
+	                    const dir = new THREE.Vector3();
+	                    app.camera.getWorldDirection(dir);
+	                    coordsEl.innerText = 
+	                        `Position: (${pos.x.toFixed(2)}, ${pos.y.toFixed(2)}, ${pos.z.toFixed(2)})\n` +
+	                        `Direction: (${dir.x.toFixed(2)}, ${dir.y.toFixed(2)}, ${dir.z.toFixed(2)})`;
+	                }
+	                requestAnimationFrame(updateCoords);
+	            };
+	            updateCoords();
+			
 		});
 	</script>
 </body>
