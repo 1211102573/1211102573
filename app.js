@@ -21,13 +21,13 @@ class App{
 		this.camera.position.set( 0, 1.6, 0 );
         
         this.dolly = new THREE.Object3D(  );
-        this.dolly.position.set(0, 0, 30);  // Modified start position
+        this.dolly.position.set(0, 0, 10);  // Modified start position
         this.dolly.add( this.camera );
         this.dummyCam = new THREE.Object3D();
         this.camera.add( this.dummyCam );
         
 		this.scene = new THREE.Scene();
-		this.scene.background = new THREE.Color(0x202030); // Custom background color
+		// this.scene.background = new THREE.Color(0x202030); // Custom background color
     		this.scene.add( this.dolly );
         
 		const ambient = new THREE.HemisphereLight(0xFFFFFF, 0xAAAAAA, 0.8);
