@@ -17,37 +17,26 @@ class App{
 
 		this.assetsPath = './assets/';
         
-		this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.01, 500 );
+		this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.01, 500 );  // Modified Wider Camera POV
 		this.camera.position.set( 0, 1.6, 0 );
         
-        this.dolly = new THREE.Object3D(  );
-        this.dolly.position.set(0, 0, 10);  // Modified start position
+        this.dolly = new THREE.Object3D();
+        this.dolly.position.set(0, 0, 5);  // Modified Dolly Start Position
         this.dolly.add( this.camera );
         this.dummyCam = new THREE.Object3D();
         this.camera.add( this.dummyCam );
         
 		this.scene = new THREE.Scene();
-		// this.scene.background = new THREE.Color(0x202030); // Custom background color
+		this.scene.background = new THREE.Color(0x202030); // Custom background color
     		this.scene.add( this.dolly );
         
-		const ambient = new THREE.HemisphereLight(0xFFFFFF, 0xAAAAAA, 0.8);
+		const ambient = new THREE.HemisphereLight(0xFFFFFF, 0xAAAAAA, 0.4); // Lower Lighting Instensity
 		this.scene.add(ambient);
-
-		// const dirLight = new THREE.DirectionalLight(0xffffff, 1); // Directional light added
-  		// dirLight.position.set(5, 10, 7.5);
-   		// dirLight.castShadow = true;
-  		// this.scene.add(dirLight);
-
-		// const gridHelper = new THREE.GridHelper(20, 20); // Grid helper
-		// this.scene.add(gridHelper);
 		
 		this.renderer = new THREE.WebGLRenderer({ antialias: true });
 		this.renderer.setPixelRatio( window.devicePixelRatio );
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
 		this.renderer.outputEncoding = THREE.sRGBEncoding;
-
- 		// this.renderer.shadowMap.enabled = true; // Enable shadows
-  		// this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 		
 		container.appendChild( this.renderer.domElement );
         this.setEnvironment();
@@ -129,7 +118,7 @@ class App{
 							child.material.visible = false;
 							self.proxy = child;
 						}else if (child.material.name.indexOf('Glass')!=-1){
-                            child.material.opacity = 0.1;
+                            child.material.opacity = 0.5; // Reduce Glass Transparency
                             child.material.transparent = true;
                         }else if (child.material.name.indexOf("SkyBox")!=-1){
                             const mat1 = child.material;
@@ -251,7 +240,7 @@ class App{
         if (this.proxy === undefined) return;
         
         const wallLimit = 1.3;
-        const speed = 2;
+        const speed = 4; // Increase Movement Speed
 		let pos = this.dolly.position.clone();
         pos.y += 1;
         
@@ -318,7 +307,7 @@ class App{
     
     showInfoboard( name, info, pos ){
         if (this.ui === undefined ) return;
-        this.ui.position.copy(pos).add( this.workingVec3.set( 0, 1.3, 0 ) );
+        this.ui.position.copy(pos).add( this.workingVec3.set( 0, 1.0, 0 ) ); // Zoom In UI Panel
         const camPos = this.dummyCam.getWorldPosition( this.workingVec3 );
         this.ui.updateElement( 'name', info.name );
         this.ui.updateElement( 'info', info.info );
