@@ -57,7 +57,9 @@ class App{
 		this.loadCollege();
         
         this.immersive = false;
-        
+       		this.respawnPosition = new THREE.Vector3(0, 0, 10); // Mod 7b Default respawn point
+		this.addResetButton(); // Mod 7c Add on-screen button
+
         const self = this;
         
         fetch('./college.json')
@@ -68,7 +70,7 @@ class App{
             });
 	}
 
-	addResetButton(){
+	addResetButton(){ //Mod 7a Reset Button
 	    const button = document.createElement('button');
 	    button.innerText = "Reset Position";
 	    button.style.position = "absolute";
@@ -80,14 +82,17 @@ class App{
 	    button.style.color = "#fff";
 	    button.style.border = "none";
 	    button.style.cursor = "pointer";
+	    button.style.fontFamily = "sans-serif";
+	    button.style.fontSize = "14px";
 	
 	    button.addEventListener("click", () => {
-	        this.dolly.position.copy(this.respawnPosition); // Move dolly back
+	        this.dolly.position.copy(this.respawnPosition); // Move dolly back to default
 	    });
 	
 	    document.body.appendChild(button);
 	}
 
+	
     setEnvironment(){
         const loader = new RGBELoader().setDataType( THREE.UnsignedByteType );
         const pmremGenerator = new THREE.PMREMGenerator( this.renderer );
@@ -182,7 +187,7 @@ class App{
         
         const self = this;
         
-        const timeoutId = setTimeout(connectionTimeout, 4000); // Mod 3 Increase Gaze Delay 
+        const timeoutId = setTimeout(connectionTimeout, 2000); // Mod 3D Increase Gaze Delay 
         
         function onSelectStart( event ) {
         
