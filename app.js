@@ -77,7 +77,7 @@ class App{
 	    const sound = new THREE.Audio(listener);
 	    const audioLoader = new THREE.AudioLoader();
 	
-	    audioLoader.load('./assets/ambient.mp3', function(buffer) {
+	    audioLoader.load('./assets/audio/ambient.mp3', function(buffer) {
 	        sound.setBuffer(buffer);
 	        sound.setLoop(true);
 	        sound.setVolume(0.3);
