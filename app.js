@@ -55,7 +55,9 @@ class App{
 		this.loadingBar = new LoadingBar();
 		
 		this.loadCollege();
-        
+
+	this.initAmbientSound(); // Mod 7a Load and play ambient background audio
+	
         this.immersive = false;
 
         const self = this;
@@ -67,7 +69,22 @@ class App{
                 self.boardData = obj;
             });
 	}
+
+	initAmbientSound(){
+	    const listener = new THREE.AudioListener();
+	    this.camera.add(listener);
 	
+	    const sound = new THREE.Audio(listener);
+	    const audioLoader = new THREE.AudioLoader();
+	
+	    audioLoader.load('./assets/audio/ambient.mp3', function(buffer) {
+	        sound.setBuffer(buffer);
+	        sound.setLoop(true);
+	        sound.setVolume(0.3);
+	        sound.play();
+	    });
+	}
+
     setEnvironment(){
         const loader = new RGBELoader().setDataType( THREE.UnsignedByteType );
         const pmremGenerator = new THREE.PMREMGenerator( this.renderer );
