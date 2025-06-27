@@ -67,7 +67,27 @@ class App{
                 self.boardData = obj;
             });
 	}
+
+	addResetButton(){
+	    const button = document.createElement('button');
+	    button.innerText = "Reset Position";
+	    button.style.position = "absolute";
+	    button.style.top = "20px";
+	    button.style.left = "20px";
+	    button.style.zIndex = 1;
+	    button.style.padding = "10px 15px";
+	    button.style.background = "#222";
+	    button.style.color = "#fff";
+	    button.style.border = "none";
+	    button.style.cursor = "pointer";
 	
+	    button.addEventListener("click", () => {
+	        this.dolly.position.copy(this.respawnPosition); // Move dolly back
+	    });
+	
+	    document.body.appendChild(button);
+	}
+
     setEnvironment(){
         const loader = new RGBELoader().setDataType( THREE.UnsignedByteType );
         const pmremGenerator = new THREE.PMREMGenerator( this.renderer );
