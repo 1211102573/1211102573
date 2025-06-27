@@ -17,20 +17,19 @@ class App{
 
 		this.assetsPath = './assets/';
         
-		this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.01, 500 );  // Modified Wider Camera POV
-		this.camera.position.set( 0, 1.2, 0 ); // Lower Camera Viewpoint
+		this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.01, 500 );  // Mod 1a Modified Wider Camera POV
+		this.camera.position.set( 0, 1.2, 0 ); // Mod 1b Lower Camera Viewpoint
         
         this.dolly = new THREE.Object3D();
-        this.dolly.position.set(0, 0, 5);  // Modified Dolly Start Position
+        this.dolly.position.set(0, 0, 5);  // Mod 1c Modified Dolly Start Position
         this.dolly.add( this.camera );
         this.dummyCam = new THREE.Object3D();
         this.camera.add( this.dummyCam );
         
 		this.scene = new THREE.Scene();
-		this.scene.background = new THREE.Color(0x202030); // Custom background color
 		this.scene.add( this.dolly );
         
-		const ambient = new THREE.HemisphereLight(0xFFFFFF, 0xAAAAAA, 0.4); // Lower Lighting Instensity
+		const ambient = new THREE.HemisphereLight(0xFFFFFF, 0xAAAAAA, 0.4); // Mod 2 Lower Lighting Instensity
 		this.scene.add(ambient);
 		
 		this.renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -163,7 +162,7 @@ class App{
         
         const self = this;
         
-        const timeoutId = setTimeout(connectionTimeout, 4000); // Increase Delay 
+        const timeoutId = setTimeout(connectionTimeout, 4000); // Mod 3 Increase Gaze Delay 
         
         function onSelectStart( event ) {
         
@@ -240,7 +239,7 @@ class App{
         if (this.proxy === undefined) return;
         
         const wallLimit = 1.3;
-        const speed = 4; // Increase Movement Speed
+        const speed = 4; // Mod 4 Increase Movement Speed
 		let pos = this.dolly.position.clone();
         pos.y += 1;
         
