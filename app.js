@@ -56,6 +56,8 @@ class App{
 		
 		this.loadCollege();
 
+	this.loadFootstepSound(); // Mod 8a Footsteps
+		
 	this.initAmbientSound(); // Mod 7a Load and play ambient background audio
 	
         this.immersive = false;
@@ -70,20 +72,33 @@ class App{
             });
 	}
 
-	initAmbientSound(){
-	    const listener = new THREE.AudioListener();
-	    this.camera.add(listener);
+loadFootstepSound(){
+    const listener = new THREE.AudioListener(); // Mod 8b
+    this.camera.add(listener);
+
+    this.footstepSound = new THREE.Audio(listener);
+    const loader = new THREE.AudioLoader();
+    loader.load('./assets/audio/footstep.mp3', (buffer) => {
+        this.footstepSound.setBuffer(buffer);
+        this.footstepSound.setLoop(false);
+        this.footstepSound.setVolume(0.5);
+     } );
+ }
 	
-	    const sound = new THREE.Audio(listener);
-	    const audioLoader = new THREE.AudioLoader();
+initAmbientSound(){
+    const listener = new THREE.AudioListener(); // Mod 7b
+    this.camera.add(listener);
 	
-	    audioLoader.load('./assets/audio/ambient.mp3', function(buffer) {
-	        sound.setBuffer(buffer);
-	        sound.setLoop(true);
-	        sound.setVolume(0.3);
-	        sound.play();
-	    });
-	}
+    const sound = new THREE.Audio(listener);
+    const audioLoader = new THREE.AudioLoader();
+	
+    audioLoader.load('./assets/audio/ambient.mp3', function(buffer) {
+        sound.setBuffer(buffer);
+        sound.setLoop(true);
+        sound.setVolume(0.3);
+        sound.play();
+      } );
+  }
 
     setEnvironment(){
         const loader = new RGBELoader().setDataType( THREE.UnsignedByteType );
