@@ -18,10 +18,10 @@ class App{
 		this.assetsPath = './assets/';
         
 		this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.01, 500 );  // Mod 1a Modified Wider Camera POV
-		this.camera.position.set( 0, 1.2, 0 ); // Mod 1b Lower Camera Viewpoint
+		this.camera.position.set( 0, 1.2, 0 ); // Mod 2 Lower Camera Viewpoint
         
         this.dolly = new THREE.Object3D();
-        this.dolly.position.set(10, -10, 10);  // Mod 2 Modified Dolly Start Position
+        this.dolly.position.set(10, -10, 10);  // Mod 3 Modified Dolly Start Position
         this.dolly.add( this.camera );
         this.dummyCam = new THREE.Object3D();
         this.camera.add( this.dummyCam );
@@ -29,7 +29,7 @@ class App{
 		this.scene = new THREE.Scene();
 		this.scene.add( this.dolly );
         
-		const ambient = new THREE.HemisphereLight(0xFFFFFF, 0xAAAAAA, 0.4); // Mod 3 Lower Lighting Instensity
+		const ambient = new THREE.HemisphereLight(0xFFFFFF, 0xAAAAAA, 0.4); // Mod 4 Lower Lighting Instensity
 		this.scene.add(ambient);
 		
 		this.renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -56,9 +56,9 @@ class App{
 		
 		this.loadCollege();
 
-	this.loadFootstepSound(); // Mod 4a Footsteps
+	this.loadFootstepSound(); // Mod 5a Footsteps
 		
-	this.initAmbientSound(); // Mod 5a Load and play ambient background audio
+	this.initAmbientSound(); // Mod 6a Load and play ambient background audio
 	
         this.immersive = false;
 
@@ -72,21 +72,8 @@ class App{
             });
 	}
 
-loadFootstepSound(){
-    const listener = new THREE.AudioListener(); // Mod 5b
-    this.camera.add(listener);
-
-    this.footstepSound = new THREE.Audio(listener);
-    const loader = new THREE.AudioLoader();
-    loader.load('./assets/audio/footstep.mp3', (buffer) => {
-        this.footstepSound.setBuffer(buffer);
-        this.footstepSound.setLoop(false);
-        this.footstepSound.setVolume(0.5);
-     } );
- }
-	
 initAmbientSound(){
-    const listener = new THREE.AudioListener(); // Mod 4b
+    const listener = new THREE.AudioListener(); // Mod 5b
     this.camera.add(listener);
 	
     const sound = new THREE.Audio(listener);
@@ -99,7 +86,20 @@ initAmbientSound(){
         sound.play();
       } );
   }
+	
+loadFootstepSound(){
+    const listener = new THREE.AudioListener(); // Mod 6b
+    this.camera.add(listener);
 
+    this.footstepSound = new THREE.Audio(listener);
+    const loader = new THREE.AudioLoader();
+    loader.load('./assets/audio/footstep.mp3', (buffer) => {
+        this.footstepSound.setBuffer(buffer);
+        this.footstepSound.setLoop(false);
+        this.footstepSound.setVolume(0.5);
+     } );
+ }
+	
     setEnvironment(){
         const loader = new RGBELoader().setDataType( THREE.UnsignedByteType );
         const pmremGenerator = new THREE.PMREMGenerator( this.renderer );
@@ -149,7 +149,7 @@ initAmbientSound(){
 							child.material.visible = false;
 							self.proxy = child;
 						}else if (child.material.name.indexOf('Glass')!=-1){
-                            child.material.opacity = 0.5; // Mod 6 Reduce Glass Transparency
+                            child.material.opacity = 0.5; // Mod 7 Reduce Glass Transparency
                             child.material.transparent = true;
                         }else if (child.material.name.indexOf("SkyBox")!=-1){
                             const mat1 = child.material;
@@ -194,7 +194,7 @@ initAmbientSound(){
         
         const self = this;
         
-        const timeoutId = setTimeout(connectionTimeout, 3000); // Mod 7 Increase Gaze Delay 
+        const timeoutId = setTimeout(connectionTimeout, 3000); // Mod 8 Increase Gaze Delay 
         
         function onSelectStart( event ) {
         
@@ -271,7 +271,7 @@ initAmbientSound(){
         if (this.proxy === undefined) return;
         
         const wallLimit = 1.3;
-        const speed = 4; // Mod 8 Increase Movement Speed
+        const speed = 4; // Mod 9 Increase Movement Speed
 		let pos = this.dolly.position.clone();
         pos.y += 1;
         
